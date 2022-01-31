@@ -1,10 +1,9 @@
 /**
-\page masterclass-21-1 PLUMED Masterclass 21.1: PLUMED syntax and analysis
+\page masterclass-XXX-XXX PLUMED Masterclass XXX.XXX: Analysis of Plumed output by Metadynminer
+\authors Vojtech Spiwok
+\date February 14, 2022
 
-\authors Max Bonomi
-\date January 18, 2021
-
-\section masterclass-21-1-aims Aims
+\section masterclass-XXXX-XXXX-aims Aims
 
 The aim of this Masterclass is to introduce users to the PLUMED syntax and to 
 illustrate how PLUMED can be used to analyze pre-existing molecular dynamics trajectories.
