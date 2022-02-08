@@ -5,19 +5,19 @@
 
 \section masterclass-XXXX-XXXX-aims Aims
 
-The aim of this Masterclass is to introduce users to the PLUMED syntax and to 
-illustrate how PLUMED can be used to analyze pre-existing molecular dynamics trajectories.
+The aim of this Masterclass is to introduce users to the R package metadynminer for analysis
+of results from metadynamics in Plumed.
 
 \section masterclass-21-1-lo Objectives
 
 Once this Masterclass is completed, users will be able to:
 
-- Write a simple PLUMED input file and use it with the \ref driver utility to analyze a trajectory.
-- Use advanced selection tools with \ref MOLINFO.
-- Define and use virtual atoms, such as \ref CENTER.
-- Deal with discontinuities in the trajectory due to periodic boundary conditions.
-- Use \ref RMSD to measure protein conformational changes.
-- Align the system to a template with \ref FIT_TO_TEMPLATE. 
+- Install R and its packages.
+- Load metadynamics results (HILLS file) to metadynminer.
+- Calcule free energy surface and plot it in publication quality.
+- Make animation of evolution of free energy surfaces.
+- Locate free energy minima and eveluate their relative free energies.
+- Use other .
  
 \section masterclass-21-1-install Setting up the software 
 
