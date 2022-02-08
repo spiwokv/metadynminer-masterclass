@@ -56,6 +56,14 @@ You can clone this repository using the following command:
 git clone https://github.com/plumed/masterclass-22-02.git
 \endverbatim
 
+The repository contains hills and colvar files, respectively, from 10 ns metadynamics simulation of
+alanine dipeptide in water calculated in Plumed. Other input data are availeble from
+[Zenodo](XXXX) but are not required in this tutorial. The repo contains:
+- `HILLS.cv12` and `COLVAR.cv12` - hills and collective variable + bias report from metadynamics with phi a psi dihedral angles
+- `HILLS.cv1` and `COLVAR.cv1` - hills and collective variable + bias report from metadynamics with phi dihedral angle
+- `HILLS.cv2` and `COLVAR.cv2` - hills and collective variable + bias report from metadynamics with psi dihedral angle
+
+
 The MD trajectory that we will analyze can be found in the folder called `data`:
 - `5-HT1B.pdb`: reference conformation of the 5-HT1B receptor with the serotonin ligand.
 - `5-HT1B.xtc`: trajectory of the 5-HT1B receptor with the serotonin ligand.
