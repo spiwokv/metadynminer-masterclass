@@ -151,7 +151,9 @@ pcamodel
 pcamodel$rotation
 \endverbatim
 
-Finally, to quit R you can use the function `q()`. 
+Finally, to quit R you can use the function `q()`. The program ask the user whether he/she wants to
+save the data (i.e. variables created in the previous course of the run). We advise users to NOT save
+data, i.e. chose the option "n" or function `q(save="n")`. 
 
 The main goal of PLUMED is to compute collective variables (or CVs), which are complex descriptors 
 of the system that can be used to describe the conformational change of a protein or a chemical reaction.
