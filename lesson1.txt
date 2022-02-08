@@ -75,6 +75,20 @@ This data are independent on Plumed version (for version >=2.0).
 
 \section masterclass-22-02-usingr Using R
 
+R is a program and a scrpting language predominantly developed for statistical data analysis. It is popular in
+statistics, economy, ecology, bioinformatics and other fileds. Let us quickly introduce R. Open R as described
+above and type:
+
+\verbatim
+1+1
+2-1
+3*3
+5/2
+\endverbatim
+
+This is 
+
+
 The main goal of PLUMED is to compute collective variables (or CVs), which are complex descriptors 
 of the system that can be used to describe the conformational change of a protein or a chemical reaction.
 This can be done either _on-the-fly_ during a molecular dynamics simulations or _a posteriori_ on a 
