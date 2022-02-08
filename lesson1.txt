@@ -5,7 +5,7 @@
 
 \section masterclass-XXXX-XXXX-aims Aims
 
-The aim of this Masterclass is to introduce users to the R package metadynminer for analysis
+The aim of this Masterclass is to introduce users to the R package Metadynminer for analysis
 of results from metadynamics in Plumed.
 
 \section masterclass-21-1-lo Objectives
@@ -13,11 +13,11 @@ of results from metadynamics in Plumed.
 Once this Masterclass is completed, users will be able to:
 
 - Install R and its packages.
-- Load metadynamics results (HILLS file) to metadynminer.
+- Load metadynamics results (`HILLS` file) to Metadynminer.
 - Calcule free energy surface and plot it in publication quality.
 - Make animation of evolution of free energy surfaces.
 - Locate free energy minima and eveluate their relative free energies.
-- Use other .
+- Use data in Metadynminer objects to do advanced calculations (e.g. reweighting).
  
 \section masterclass-21-1-install Setting up the software 
 
