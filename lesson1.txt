@@ -1,14 +1,14 @@
 /**
-\page masterclass-XXX-XXX PLUMED Masterclass XXX.XXX: Analysis of Plumed output by Metadynminer
+\page masterclass-22-02 PLUMED Masterclass 22-02: Analysis of Plumed output by Metadynminer
 \authors Vojtech Spiwok
 \date February 14, 2022
 
-\section masterclass-XXXX-XXXX-aims Aims
+\section masterclass-22-02-aims Aims
 
 The aim of this Masterclass is to introduce users to the R package Metadynminer for analysis
 of results from metadynamics in Plumed.
 
-\section masterclass-21-1-lo Objectives
+\section masterclass-22-02-lo Objectives
 
 Once this Masterclass is completed, users will be able to:
 
@@ -19,92 +19,41 @@ Once this Masterclass is completed, users will be able to:
 - Locate free energy minima and eveluate their relative free energies.
 - Use data in Metadynminer objects to do advanced calculations (e.g. reweighting).
  
-\section masterclass-21-1-install Setting up the software 
+\section masterclass-22-02-install Setting up the software 
 
-\subsection masterclass-21-1-conda Installation
+\subsection masterclass-22-02-metadynminer Installation
 
-We will use [conda](https://docs.conda.io/en/latest/) to install all the software needed in this Masterclass:
-- [PLUMED](https://www.plumed.org) version 2.7.0
-- [NumPy](https://numpy.org)
-- [pandas](https://pandas.pydata.org)
-- [matplotlib](https://matplotlib.org)
-- [jupyter](https://jupyter.org/index.html)
-- [MDTraj](https://mdtraj.org/1.9.4/index.html)
-- [MDAnalysis](https://www.mdanalysis.org)
-- [Git](https://git-scm.com)
+We will use [R](https://www.r-project.org/) installed from [CRAN](https://cloud.r-project.org/).
+Go to [CRAN](https://cloud.r-project.org/) and follow the installation instructions for your
+operating system. R is Open Source. It is not necessary to use graphical user interface but it
+is very useful, especially for making illustrations.
 
-First, make sure conda is installed by typing:
+If you plan to use a graphical user interface, the best option is [Rstudio](https://www.rstudio.com/).
+[Desktop version of Rstudio](https://www.rstudio.com/products/rstudio/) is Open Source. Follow
+the installation instructions for yor operating system.
+
+To install metadynminer open R (in commandline type `R` or open GUI by typing `rstudio` or using
+an icon) and type:
 
 \verbatim
-conda
+install.packages("metadynminer")
 \endverbatim
 
-If the command is not found, please refer to these [instructions](https://docs.conda.io/en/latest/miniconda.html) to install conda on your machine.
-Alternatively, if you use the [Homebrew](https://brew.sh) package manager, you can install conda with:
+The output should contain: `* DONE (metadynminer)`. If you have an output: `installation of package
+metadynminer had non-zero exit status` there was a problem with installation. You may try:
+
+- On MS Windows you may try to install `Rtools`.
+- If you have permission issues, you can try commands `Sys.getenv("R_HOME")` and
+`Sys.getenv("R_LIBS_USER")` and check the permission of the printed directories. You may change
+installation directories by corresponding `Sys.setenv(...)` commands.
+
+\section masterclass-22-02-resources Resources
+
+The data needed for this Masterclass can be found on [GitHub](https://github.com/plumed/masterclass-22-02).
+You can clone this repository using the following command:
 
 \verbatim
-brew install --cask anaconda
-# add this line to your .bashrc
-export PATH="/usr/local/anaconda3/bin:$PATH"
-\endverbatim
-
-Now we can create a conda environment for the PLUMED Masterclass:
-
-\verbatim
-conda create --name plumed-masterclass 
-\endverbatim
-
-and activate it with:
-
-\verbatim
-conda activate plumed-masterclass
-\endverbatim
-
-Finally, we can proceed with the installation of the required software:
-
-\verbatim
-conda install -c conda-forge plumed py-plumed numpy pandas matplotlib notebook mdtraj mdanalysis git
-\endverbatim
-
-\note Do not forget to activate the `plumed-masterclass` environment every time you open a new terminal/shell.
-
-\subsection masterclass-21-1-plumed PLUMED overview 
- 
-PLUMED is a library that can be incorporated into many molecular dynamics (MD) codes by adding a relatively simple and well documented interface.
-Once it is incorporated you can use PLUMED to perform on-the-fly a variety of different analyses and to bias 
-the sampling in MD simulations. Additionally, PLUMED can be used as a standalone code for analyzing trajectories.
-If you want to use the code in this way, you can run the PLUMED executable by issuing the command:
-
-\verbatim
-plumed <instructions>
-\endverbatim
-
-Let's start by getting a feel for the range of calculations that PLUMED can do. Issue the following command now:
-
-\verbatim
-plumed --help 
-\endverbatim
-
-The output of this command is the list of \ref tools included in PLUMED. Among these, there are commands that allow you
-to patch an MD code, postprocess metadynamics simulations, and build the manual. In this
-class we will use PLUMED to analyze trajectories. In order to do so, we will
-learn how to use the \ref driver command line tool. 
-Let's look at the options of PLUMED \ref driver by issuing the following command:  
-
-\verbatim
-plumed driver --help
-\endverbatim
-
-As you can see we can do a number of things with \ref driver. For all of these options, however, we are going to need to write 
-a PLUMED input file. 
-
-\section masterclass-21-1-resources Resources
-
-The data needed to complete the exercises of this Masterclass can be found on [GitHub](https://github.com/plumed/masterclass-21-1).
-You can clone this repository locally on your machine using the following command:
-
-\verbatim
-git clone https://github.com/plumed/masterclass-21-1.git
+git clone https://github.com/plumed/masterclass-22-02.git
 \endverbatim
 
 The MD trajectory that we will analyze can be found in the folder called `data`:
