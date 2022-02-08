@@ -234,6 +234,6 @@ To solve this exercise, no template PLUMED input file nor any indication of the 
 
 */
 
-link: @subpage masterclass-21-1 
+link: @subpage masterclass-22-02 
 
-description: This Masterclass explains the syntax of the PLUMED input file and how to use PLUMED to analyze CVs
+description: This Masterclass explains the use of R package Metadynminer to analyze metadynamics results.
