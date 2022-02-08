@@ -157,80 +157,11 @@ data, i.e. chose the option "n" or function `q(save="n")`.
 
 \subsection masterclass-22-02-ex-1 Exercise 1: Calculation of the free energy surface from metadynamics hills
 
+\subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
 
+\subsection masterclass-22-02-ex-3 Exercise 3: Making a movie of flooding
 
-As previously mentioned, the first 40 N-terminal residues of the 5-HT1B receptor are quite flexible, while the rest of the 
-protein remains more stable during the course of the simulation. In this exercise, you will learn how to use \ref RMSD to
-measure deviations from a reference structure. To use this CV, you need to keep in mind that you must specify in the PLUMED input
-a PDB file in which you mark the atoms that you want to use to:
-- optimally align a conformation to the reference;
-- calculate the displacement from the reference conformation after optimal alignment.
-
-Keep in mind that these two sets of atoms might be different! In fact, the objective of this exercise is to calculate:
-- the \ref RMSD of the backbone atoms of the first 40 N-terminal residues after aligning the system on the backbone atoms of 
-  residues 41 to 390;
-- the \ref RMSD of the backbone atoms of residues 41 to 390 after aligning the system on the same set of atoms.
-
-To create the two PDB files needed to define the two \ref RMSD CVs, you can start from the provided PDB file
-`5-HT1B.pdb`. Please consult the manual at the \ref RMSD page, in order to:
-- create the PLUMED input file to calculate the two CVs defined above (use `TYPE=OPTIMAL`);
-- learn how to mark atoms for alignment and displacement in the PDB files;
-- check whether PBCs are automatically taken care of or you need to use the \ref WHOLEMOLECULES action.
-
-After analyzing `5-HT1B.xtc` with the \ref driver tool, can you say which part of the receptor is more flexible and deviates more from the
-starting conformation during the course of the simulation?
-
-\subsection masterclass-21-1-ex-6 Exercise 6: Aligning conformations to a template
-
-In this exercise, we will learn how to align a MD trajectory to a reference conformation, after fixing possible discontinuities due to PBCs.
-The goal is to compute the vertical position of the serotonin ligand with respect to the lipid bilayer. In the simulations of membrane proteins,
-typically the initial conformation is oriented so that the lipid bilayer is parallel to the xy plane (look for example at `5-HT1B.pdb`). 
-Therefore, initially one could use for example
-the coordinate `z` of the geometric center of the ligand to measure how far it is from the membrane bilayer. However, during the simulation:
-- the system can translate from its original position;
-- the system can be broken by PBCs;
-
-therefore one could not use an absolute position to keep track of the location of the ligand. To solve this problem, there are several PLUMED actions that
-can be used to make sure the system is not broken by PBCs, to re-align it to a reference conformation, and thus to use absolute positions safely.
-
-To complete this exercise, the users will need to make heavy use of the PLUMED [manual](https://www.plumed.org/doc-v2.7/user-doc/html/colvarintro.html) to prepare the input file on their own. In the following, some suggestions
-will be given:
-- first, make sure the entire protein is not broken by PBCs using \ref WHOLEMOLECULES;
-- then, make sure the ligand is not broken by PBCs and in the same cell as the protein, using the \ref WRAPAROUND action and the `GROUPBY` option;
-- to align the _stable_ protein residues (as defined in \ref masterclass-21-1-ex-5, i.e. residues 41 to 390) to the template `5-HT1B.pdb`, you can use \ref FIT_TO_TEMPLATE;
-- at this point, you can safely define the position of the geometric center of the ligand using the \ref POSITION CV with the option `NOPBC`;
-- the requested CV is the `z` component of the \ref POSITION CV. 
-
-You can check that your PLUMED input file is correct in two ways. First, you can print out the conformations of the system after the transformations done
-by \ref WHOLEMOLECULES, \ref WRAPAROUND, and \ref FIT_TO_TEMPLATE by modifying your input file as follows:
-
-\plumedfile
-# Activate MOLINFO functionalities
-MOLINFO STRUCTURE=__FILL__
-# Here put your PLUMED input file
-#
-#
-# Write coordinates of all the atoms to file after PLUMED transformations
-DUMPATOMS FILE=5-HT1B_aligned.gro ATOMS=__FILL__
-\endplumedfile
-
-Now, you can visualize the `5-HT1B_aligned.gro` file using [VMD](https://www.ks.uiuc.edu/Research/vmd/).
-Second, if you inspect the time series of your CV, this should be a continuous trajectory that spans the range from 9 nm to 18 nm.
-
-\subsection masterclass-21-1-ex-7 Exercise 7: Estimating binding propensity 
-
-In this last exercise, we want to determine the propensity of the serotonin ligand to bind the first 40 N-terminal flexible residues
-of the 5-HT1B receptor and if there are hot-spots where binding is more favorite. In order to answer to these questions, the user will:
-- compute the fraction of bound conformations over the total number of frames in the MD trajectory;
-- for each individual residue and glycan, compute the fraction of bound conformation per residue/glycan;
-- dump all bound conformations to a `gro` file, after fixing PBCs as in \ref masterclass-21-1-ex-6;
-- for each individual residue and glycan, dump all bound conformations to a separate `gro` file, after fixing PBCs.
-
-To solve this exercise, no template PLUMED input file nor any indication of the procedure to follow will be given. The users should only keep in mind that:
-- we arbitrarily define as *bound* a conformation in which at least one pair of atoms of the ligand and of the protein/residue/glycan is closer than 0.4 nm;
-- any pre-exisiting CV defined in the PLUMED [manual](https://www.plumed.org/doc-v2.7/user-doc/html/colvarintro.html) can be used;
-- any CV defined directly by the user in the PLUMED input file via the \ref CUSTOM action can be used.
-
+\subsection masterclass-22-02-ex-4 Exercise 4: Reweighting
 
 */
 
