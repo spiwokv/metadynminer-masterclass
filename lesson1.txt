@@ -14,9 +14,9 @@ Once this Masterclass is completed, users will be able to:
 
 - Install R and its packages.
 - Load metadynamics results (`HILLS` file) to Metadynminer.
-- Calcule free energy surface and plot it in publication quality.
-- Make animation of evolution of free energy surfaces.
-- Locate free energy minima and eveluate their relative free energies.
+- Calcule free energy surface and plot it in a publication quality.
+- Make an animation of evolution of a free energy surface.
+- Locate free energy minima and evaluate their relative free energies.
 - Use data in Metadynminer objects to do advanced calculations (e.g. reweighting).
  
 \section masterclass-22-02-install Setting up the software 
@@ -32,7 +32,7 @@ If you plan to use a graphical user interface, the best option is [Rstudio](http
 [Desktop version of Rstudio](https://www.rstudio.com/products/rstudio/) is Open Source. Follow
 the installation instructions for yor operating system.
 
-To install metadynminer open R (in commandline type `R` or open GUI by typing `rstudio` or using
+To install metadynminer, open R (in commandline type `R` or open GUI by typing `rstudio` or using
 an icon) and type:
 
 \verbatim
@@ -42,18 +42,19 @@ install.packages("metadynminer")
 The output should contain: `* DONE (metadynminer)`. If you have an output: `installation of package
 metadynminer had non-zero exit status` there was a problem with installation. You may try:
 
-- On MS Windows you may try to install `Rtools`.
+- On MS Windows install `Rtools`.
 - If you have permission issues, you can try commands `Sys.getenv("R_HOME")` and
 `Sys.getenv("R_LIBS_USER")` and check the permission of the printed directories. You may change
 installation directories by corresponding `Sys.setenv(...)` commands.
 
-You mya check whether Metadynminer was installed correctly by typing:
+You may check whether Metadynminer was installed correctly by typing:
 
 \verbatim
 library(metadynminer)
 \endverbatim
 
-This command shold have no output.
+This command shold have no output. Installation is done only once (or can be repreated for
+version upgrades). Loading of the package by `library` command must be done in every R seance.
 
 \section masterclass-22-02-resources Resources
 
