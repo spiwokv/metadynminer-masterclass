@@ -451,6 +451,52 @@ Evaluate the flooding by the 1D potential in terms of convergence.
 
 \subsection masterclass-22-02-ex-4 Exercise 4: Reweighting
 
+It would be also interesting to see the performance of metadynamics
+with psi torsion as the only CV in a similar manner as in the previous
+excersize. Unfortunately, it is not possible to
+calculate the free energy surface in the space of phi torsion from this
+simulation simply by summing hills. This can be done by reweighting.
+This will also demonstrate advanced features of metadynminer.
+
+Reweigting predicts what would have been the distribution of a CV
+or CVs in the biased simulation, if it had not been biased. Umbrella
+sampling reweighting weights the distribution of the states by
+$\exp(+V_{bias}/kT)$. This can be applied to metadynamics bias
+potential with a correction to the time-dependence of the bias
+potential.
+
+We will use the correction introduced by Tiwari and Parrinello
+(REFXXXXX). The main idea is the bias potential is divided into
+time-independent and the time-dependent component. The time-dependent
+component is calculated by following procedure:
+\verbatim
+library(metadynminer)
+bf <- 15
+nframes <- 50
+myhills12 <- read.hills("HILLS.cv12", per=c(T, T))
+s1<-rep(0, nframes)
+s2<-rep(0, nframes)
+for(i in 1:nframes) {
+  step <- i*length(mtd$time)/nframes
+  onefes <- fes(myhills12, imax=step)
+  s1[i] <- sum(exp(-1000*onefes$fes/8.314/300))
+  s2[i] <- sum(exp(-1000*onefes$fes/8.314/300/bf))
+}
+ebetac <- s1/s2
+\endverbatim
+The variable `bf` contains the bias factor. The R function `rep`
+generates a vector by repeating an element. Here it generates
+a vector with `nframes` (50) elements equal to zero. The variable
+`step` is equal to the number of hills divided by 50 in the first
+step, twice as much in the second step etc. The free energy surface
+is calculated for this number of hills. Next, $\exp(-G/kT)$ or
+$\exp(-G/k\DeltaT)$ is calculated and stored in vectors `s1` and
+`s2`, respectively. Finally, `s1` and `s2` are divided elementwise
+and stored to `ebetac`.
+
+
+
+The first step is calculation of th
 
 
 */
