@@ -354,7 +354,82 @@ plot(myfes12)
 dev.off()
 \endverbatim
 
+The functions for image saving can be used with regular expressions. This is
+useful for making movies. A movie of free energy evolution can be simply made
+by:
+\verbatim
+tfes<-fes(myhills12, tmax=50)
+png("snap%04d.png")
+plot(tfes, zlim=c(-200,0))
+for(i in 1:199) {
+  tfes<-tfes+fes(myhills12, imin=50*i+1, imax=50*(i+1))
+  plot(tfes, zlim=c(-200,0))
+}
+dev.off()
+\endverbatim
+Functions `imin` and `imax` make it possible to restrict summation to certain
+hill range. The first line calculates the sum of the first 50 hills. The second
+call of the `fes` function calculates the sum of hills 51 to 100 and adds it
+to the total free energy surface. The resulting 200 files named `snap0001.png`,
+`snap0002.png`, etc can be concatenated to a movie by means of some movie
+editing software.
+
 \subsection masterclass-22-02-ex-3 Exercise 3: Making a movie of flooding
+
+The first task in this tutorial is to calculate the free energy surface
+of alanine dipeptide calculated in the space of two collective variables
+phi and psi. This can be done by typing:
+\verbatim
+library(metadynminer)
+myhills12 <- read.hills("HILLS.cv12", per=c(T, T))
+myfes12 <- fes(myhills12)
+plot(myfes12)
+\endverbatim
+
+The 2D free energy surface can be converted to 1D by conversion of the free
+energy to probability, integration of probabilities along one CV and conversion
+back to free energy. In metadynminer you can do this by the function `fes2d21d`:
+\verbatim
+myfes12.1d <- fes2d21d(myhills12, remdim=2)
+\endverbatim
+The option `remdim` sets which CV should be removed (`remdim=2` removes psi).
+It is also possible to set temperature and energy units by `temp` and `eunit`,
+respectively.
+
+Now we will use this free energy surface (calculated from 10 ns metadynamics)
+as the "ground truth" and we will try how this free energy surface was flooded
+by 1 ns metadynamics with a single CV, either phi or psi.
+
+Hills file from other two simulations can be loaded by:
+\verbatim
+myhills1 <- read.hills("HILLS.cv1", per=_FILL_)
+myhills2 <- read.hills("HILLS.cv2", per=_FILL_)
+\endverbatim
+Replace `_FILL_` by the correct expression.
+
+Next, for time 10 ps to 1 ns (hills 10 to 1000, by 10) calculate
+the free energy surface, convert it to a bias potential by multiplication
+by minus (biasfactor - 1)/biasfactor and add it to the ground truth free
+energy surface. Plot the result (in black) together with the ground truth
+free energy surface in red:
+\verbatim
+myfes12.1d <- myfes12.1d - min(myfes12.1d)
+flooded <- myfes12.1d
+png("snap%04d.png")
+plot(myfes12.1d, zlim=c(0,100), col="red")
+for(i in _FILL_) {
+  plot(myfes12.1d, zlim=c(0,100), col="red")
+  flooded <- flooded + fes(myhills1, imin=_FILL_, imax=_FILL_)
+  lines(flooded)
+}
+dev.off()
+\endverbatim
+Again, replace each `_FILL_` by a suitable expression.
+Keep in mind that it is possible to compose the plot from multiple plots.
+The function `plot` creates the first plot and functions `lines` or
+`points` add to this plot.
+
+If possible, make a movie or visually inspect the resulting files.
 
 \subsection masterclass-22-02-ex-4 Exercise 4: Reweighting
 
