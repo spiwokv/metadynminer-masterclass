@@ -336,7 +336,23 @@ myneb
 plot(myneb)
 \endverbatim
 
-\subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
+\subsection masterclass-22-02-ex-2 Exercise 2: Making high resolution plots and movies
+
+In Rstudio it is possible save ploted figures in different vector and bitmap formats
+and it is possible to customize their resolution. As an alternative it is possible to
+save figures by functions `png`, `bmp`, `jpeg`, `tiff`, `svg`, `pdf` or `eps`.
+These functions use the file name as an argument and switches the ploting environment,
+so that the file is plotted to the file and not on the screen. This option must
+be switched off by the function `dev.off()`.
+These functions work in the basic R (i.e. without Rstudio) and can be used for
+example at high-performance computing clusters, grids and clouds without GUI.
+Our suggestion to make a nice publication quality figure in the size of 8x8 cm
+(typical half page) is:
+\verbatim
+png("filename.png", height=8, width=8, units='cm', res=600, pointsize=6)
+plot(myfes12)
+dev.off()
+\endverbatim
 
 \subsection masterclass-22-02-ex-3 Exercise 3: Making a movie of flooding
 
