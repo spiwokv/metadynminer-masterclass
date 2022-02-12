@@ -430,6 +430,7 @@ The function `plot` creates the first plot and functions `lines` or
 `points` add to this plot.
 
 If possible, make a movie or visually inspect the resulting files.
+Evaluate the flooding by the 1D potential in terms of convergence.
 
 \subsection masterclass-22-02-ex-4 Exercise 4: Reweighting
 
