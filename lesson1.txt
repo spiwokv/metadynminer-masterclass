@@ -452,35 +452,34 @@ Evaluate the flooding by the 1D potential in terms of convergence.
 \subsection masterclass-22-02-ex-4 Exercise 4: Reweighting
 
 It would be also interesting to see the performance of metadynamics
-with psi torsion as the only CV in a similar manner as in the previous
-excersize. Unfortunately, it is not possible to
+with psi torsion as the only CV. Unfortunately, it is not possible to
 calculate the free energy surface in the space of phi torsion from this
 simulation simply by summing hills. This can be done by reweighting.
 This will also demonstrate advanced features of metadynminer.
 
 Reweigting predicts what would have been the distribution of a CV
 or CVs in the biased simulation, if it had not been biased. Umbrella
-sampling reweighting weights the distribution of the states by
+sampling reweighting (REFXXX) weights the distribution of the states by
 $\exp(+V_{bias}/kT)$. This can be applied to metadynamics bias
 potential with a correction to the time-dependence of the bias
-potential.
-
-We will use the correction introduced by Tiwari and Parrinello
-(REFXXXXX). The main idea is the bias potential is divided into
+potential. We will use the correction introduced by
+Tiwari and Parrinello (REFXXXXX).
+The main idea is the bias potential is divided into
 time-independent and the time-dependent component. The time-dependent
 component is calculated by following procedure:
 \verbatim
 library(metadynminer)
 bf <- 15
 nframes <- 50
-myhills12 <- read.hills("HILLS.cv12", per=c(T, T))
+temp <- 300
+myhills2 <- read.hills("HILLS.cv2", per=c(T))
 s1<-rep(0, nframes)
 s2<-rep(0, nframes)
 for(i in 1:nframes) {
-  step <- i*length(mtd$time)/nframes
-  onefes <- fes(myhills12, imax=step)
-  s1[i] <- sum(exp(-1000*onefes$fes/8.314/300))
-  s2[i] <- sum(exp(-1000*onefes$fes/8.314/300/bf))
+  step <- i*length(myhills2$time)/nframes
+  onefes <- fes(myhills2, imax=step)
+  s1[i] <- sum(exp(-1000*onefes$fes/8.314/temp))
+  s2[i] <- sum(exp(-1000*onefes$fes/8.314/temp/bf))
 }
 ebetac <- s1/s2
 \endverbatim
@@ -494,10 +493,36 @@ $\exp(-G/k\DeltaT)$ is calculated and stored in vectors `s1` and
 `s2`, respectively. Finally, `s1` and `s2` are divided elementwise
 and stored to `ebetac`.
 
-
-
-The first step is calculation of th
-
+Next, we open the colvar file and calculate the probabilities of
+the phi torsion. This can be done by:
+\verbatim
+mycolvar2 <- read.table("COLVAR.cv2")
+cv1 <- floor(32*(mycolvar2[,2]+pi)/pi) + 1
+bias <- 1000*mycolvar2[,4]
+probs <- rep(0, 64)
+for(i in 1:nrow(mycolvar2)) {
+  step <- (i-1)*nframes/nrow(mycolvar2)+1
+  probs[cv1[i]] <- probs[cv1[i]] + exp(bias[i]/temp/8.314)/ebetac[step]
+}
+fes <- -8.314*temp*log(probs)/1000
+fes <- fes - min(fes)
+fes[fes>100] <- 100 
+myfes <- fes(myhills2, npoints=64, imax=1)
+myfes$fes <- fes
+plot(myfes, ylim=c(0,60))
+\endverbatim
+The function `read.table` is a standard function of R for reading
+tabular data. The first CV is extracted from the table and converted
+to bin number (with 64 bins). Next, probability vector `prob` is
+generated. The program than runs acros all lines of the colvar
+file and adds `exp(bias[i]/temp/8.314)/ebetac[step]` to the probability
+in the bin of phi angle in i-th line. The resulting probabilities are
+converted to free energy and the free energy of unsampled bins
+is converted to 100 kJ/mol (instead of infinity, for better handling).
+Finally, a free energy surface with 64 bins is calculated from the
+first hill and the free energy surface object is replaced by our
+`fes`. This free energy surface is plotted. Compare free energy
+surfaces calculated with phi CV and psi CV. 
 
 */
 
