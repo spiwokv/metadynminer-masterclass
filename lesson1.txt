@@ -410,16 +410,19 @@ Replace `_FILL_` by the correct expression.
 Next, for time 10 ps to 1 ns (hills 10 to 1000, by 10) calculate
 the free energy surface, convert it to a bias potential by multiplication
 by minus (biasfactor - 1)/biasfactor and add it to the ground truth free
-energy surface. Plot the result (in black) together with the ground truth
+energy surface. The bias factor was 15 in this simulation
+Plot the result (in black) together with the ground truth
 free energy surface in red:
 \verbatim
 myfes12.1d <- myfes12.1d - min(myfes12.1d)
 flooded <- myfes12.1d
+flooded$hills <- c()
 png("snap%04d.png")
-plot(myfes12.1d, zlim=c(0,100), col="red")
+plot(myfes12.1d, ylim=c(0,100), col="red")
 for(i in _FILL_) {
-  plot(myfes12.1d, zlim=c(0,100), col="red")
-  flooded <- flooded + fes(myhills1, imin=_FILL_, imax=_FILL_)
+  plot(myfes12.1d, ylim=c(0,100), col="red")
+  myfes1 <- fes(myhills1, imin=_FILL_, imax=_FILL_)
+  flooded <- flooded + _FILL_*myfes1
   lines(flooded)
 }
 dev.off()
@@ -429,10 +432,26 @@ Keep in mind that it is possible to compose the plot from multiple plots.
 The function `plot` creates the first plot and functions `lines` or
 `points` add to this plot.
 
+The meaning of the line `flooded$hills <- c()` is following.
+Objects in R may contain different instances stored as `variable$instance`
+The object of the free energy surface contains the free energy surface,
+information about the axes and their periodicity and other information,
+but also the original hills from which the free energy surface was
+calculated. Samething similar applies also to the object of free
+energy minima. The reason for this is that the function `feprof` needs
+hills data. Summation of free energy surfaces is equivalent to
+concatenation of hills, so the sum of two free energy surfaces
+contains concatenated hills as its `$hills` instance. However,
+in the line `flooded <- flooded + _FILL_*myfes1` it is not possible
+to concatenate 1D and 2D hills. For this reason we erased hills
+from the variable `flooded`.
+
 If possible, make a movie or visually inspect the resulting files.
 Evaluate the flooding by the 1D potential in terms of convergence.
 
 \subsection masterclass-22-02-ex-4 Exercise 4: Reweighting
+
+
 
 */
 
