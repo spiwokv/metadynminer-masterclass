@@ -340,14 +340,14 @@ linesonfes(myneb)
 
 \subsection masterclass-22-02-ex-2 Exercise 2: Making high resolution plots and movies
 
-In Rstudio it is possible save ploted figures in different vector and bitmap formats
-and it is possible to customize their resolution. As an alternative it is possible to
-save figures by functions `png`, `bmp`, `jpeg`, `tiff`, `svg`, `pdf` or `eps`.
-These functions use the file name as an argument and switches the ploting environment,
-so that the file is plotted to the file and not on the screen. This option must
+In Rstudio it is possible to save plotted figures in different vector and bitmap formats
+and it is possible to customize their resolution. As an alternative, it is possible to
+save figures by the functions `png`, `bmp`, `jpeg`, `tiff`, `svg`, `pdf` or `eps`.
+These functions use the file name as an argument and it switches the plotting environment,
+so that the file is plotted into the file and not on the screen. This option must
 be switched off by the function `dev.off()`.
-These functions work in the basic R (i.e. without Rstudio) and can be used for
-example at high-performance computing clusters, grids and clouds without GUI.
+These functions work in the basic R (i.e., without Rstudio) and can be used for
+example at high-performance computing clusters, grids, and clouds without GUI.
 Our suggestion to make a nice publication quality figure in the size of 8x8 cm
 (typical half page) is:
 \verbatim
@@ -369,7 +369,7 @@ for(i in 1:199) {
 }
 dev.off()
 \endverbatim
-Functions `imin` and `imax` make it possible to restrict summation to certain
+Functions `imin` and `imax` make it possible to restrict the summation to certain
 hill range. The first line calculates the sum of the first 50 hills. The second
 call of the `fes` function calculates the sum of hills 51 to 100 and adds it
 to the total free energy surface. The resulting 200 files named `snap0001.png`,
@@ -395,25 +395,25 @@ back to free energy. In metadynminer you can do this by the function `fes2d21d`:
 myfes12.1d <- fes2d21d(myhills12, remdim=2)
 \endverbatim
 The option `remdim` sets which CV should be removed (`remdim=2` removes psi).
-It is also possible to set temperature and energy units by `temp` and `eunit`,
+It is also possible to set the temperature and energy units by `temp` and `eunit`,
 respectively.
 
 Now we will use this free energy surface (calculated from 10 ns metadynamics)
 as the "ground truth" and we will try how this free energy surface was flooded
 by 1 ns metadynamics with a single CV, either phi or psi.
 
-Hills file from other two simulations can be loaded by:
+Hills file from the other two simulations can be loaded by:
 \verbatim
 myhills1 <- read.hills("HILLS.cv1", per=_FILL_)
 myhills2 <- read.hills("HILLS.cv2", per=_FILL_)
 \endverbatim
 Replace `_FILL_` by the correct expression.
 
-Next, for time 10 ps to 1 ns (hills 10 to 1000, by 10) calculate
-the free energy surface, convert it to a bias potential by multiplication
-by minus (biasfactor - 1)/biasfactor and add it to the ground truth free
-energy surface. The bias factor was 15 in this simulation
-Plot the result (in black) together with the ground truth
+Next, for time 10 ps to 1 ns (hills 10 to 1000, with an increment of 10),
+calculate the free energy surface, convert it to a bias potential by
+multiplication by minus (biasfactor - 1)/biasfactor and add it to
+the ground truth free energy surface. The bias factor was 15 in this
+simulation. Plot the result (in black) together with the ground truth
 free energy surface in red:
 \verbatim
 myfes12.1d <- myfes12.1d - min(myfes12.1d)
@@ -439,7 +439,7 @@ Objects in R may contain different instances stored as `variable$instance`
 The object of the free energy surface contains the free energy surface,
 information about the axes and their periodicity and other information,
 but also the original hills from which the free energy surface was
-calculated. Samething similar applies also to the object of free
+calculated. Something similar applies also to the object of free
 energy minima. The reason for this is that the function `feprof` needs
 hills data. Summation of free energy surfaces is equivalent to
 concatenation of hills, so the sum of two free energy surfaces
@@ -451,24 +451,24 @@ from the variable `flooded`.
 If possible, make a movie or visually inspect the resulting files.
 Evaluate the flooding by the 1D potential in terms of convergence.
 
-\subsection masterclass-22-02-ex-4 Exercise 4: Reweighting
+\subsection masterclass-22-02-ex-4 Exercise 4: Reweighing
 
 It would be also interesting to see the performance of metadynamics
 with psi torsion as the only CV. Unfortunately, it is not possible to
 calculate the free energy surface in the space of phi torsion from this
-simulation simply by summing hills. This can be done by reweighting.
-This will also demonstrate advanced features of metadynminer.
+simulation simply by summing hills. This can be done by reweighing.
+This will also demonstrate the advanced features of metadynminer.
 
-Reweigting predicts what would have been the distribution of a CV
+Reweighing predicts what would have been the distribution of a CV
 or CVs in the biased simulation, if it had not been biased. Umbrella
-sampling reweighting (REFXXX) weights the distribution of the states by
+sampling reweighing (REFXXX) weights the distribution of the states by
 $\exp(+V_{bias}/kT)$. This can be applied to metadynamics bias
 potential with a correction to the time-dependence of the bias
 potential. We will use the correction introduced by
 Tiwari and Parrinello (REFXXXXX).
 The main idea is the bias potential is divided into
 time-independent and the time-dependent component. The time-dependent
-component is calculated by following procedure:
+component is calculated by the following procedure:
 \verbatim
 library(metadynminer)
 bf <- 15
@@ -489,7 +489,7 @@ The variable `bf` contains the bias factor. The R function `rep`
 generates a vector by repeating an element. Here it generates
 a vector with `nframes` (50) elements equal to zero. The variable
 `step` is equal to the number of hills divided by 50 in the first
-step, twice as much in the second step etc. The free energy surface
+step, twice as many in the second step, etc. The free energy surface
 is calculated for this number of hills. Next, $\exp(-G/kT)$ or
 $\exp(-G/k\DeltaT)$ is calculated and stored in vectors `s1` and
 `s2`, respectively. Finally, `s1` and `s2` are divided elementwise
@@ -515,8 +515,8 @@ plot(myfes, ylim=c(0,60))
 \endverbatim
 The function `read.table` is a standard function of R for reading
 tabular data. The first CV is extracted from the table and converted
-to bin number (with 64 bins). Next, probability vector `prob` is
-generated. The program than runs acros all lines of the colvar
+to bin number (with 64 bins). Next, the probability vector `prob` is
+generated. The program then runs across all lines of the colvar
 file and adds `exp(bias[i]/temp/8.314)/ebetac[step]` to the probability
 in the bin of phi angle in i-th line. The resulting probabilities are
 converted to free energy and the free energy of unsampled bins
