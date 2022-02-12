@@ -253,7 +253,21 @@ plot(myfes12, colscale=T)
 \endverbatim
 You may change the title of the scale by `colscalelab="your label"`.
 
+It is often necessary to control the levels of contours. For example, to plot
+the free energy surface with 20 contours by 10 kJ/mol type:
+\verbatim
+myfes12 <- myfes12 - min(myfes12)
+plot(myfes12, zlim=c(0,200), nlevels=20)
+\endverbatim
+You may also explicitely set levels as a vector by the parameters `levels`.
 
+Default color palette for a 2D free energy surface in Metadynminer is
+`rainbow(135)[100:1]` (i.e. rainbow without violet color). If you prefer your
+own color palette you may set it as `col` paramteres. For example:
+\verbatim
+plot(myfes12, col=gray.colors(50))
+\endverbatim
+plots the free energy surface in gray colors.
 
 \subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
 
