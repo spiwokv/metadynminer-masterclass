@@ -14,10 +14,10 @@ Once this Masterclass is completed, users will be able to:
 
 - Install R and its packages.
 - Load metadynamics results (`HILLS` file) to Metadynminer.
-- Calcule free energy surface and plot it in a publication quality.
-- Make an animation of evolution of a free energy surface.
+- Calculate a free energy surface and plot it in a publication quality.
 - Locate free energy minima and evaluate their relative free energies.
-- Use data in Metadynminer objects to do advanced calculations (e.g. reweighting).
+- Make an animation of the evolution of a free energy surface.
+- Use data in Metadynminer objects to do advanced calculations (e.g., reweighting).
  
 \section masterclass-22-02-install Setting up the software 
 
@@ -25,12 +25,12 @@ Once this Masterclass is completed, users will be able to:
 
 We will use [R](https://www.r-project.org/) installed from [CRAN](https://cloud.r-project.org/).
 Go to [CRAN](https://cloud.r-project.org/) and follow the installation instructions for your
-operating system. R is Open Source. It is not necessary to use graphical user interface but it
+operating system. R is Open Source. It is not necessary to use a graphical user interface but it
 is very useful, especially for making illustrations.
 
 If you plan to use a graphical user interface, the best option is [Rstudio](https://www.rstudio.com/).
 [Desktop version of Rstudio](https://www.rstudio.com/products/rstudio/) is Open Source. Follow
-the installation instructions for yor operating system.
+the installation instructions for your operating system.
 
 To install metadynminer, open R (in commandline type `R` or open GUI by typing `rstudio` or using
 an icon) and type:
@@ -43,17 +43,16 @@ The output should contain: `* DONE (metadynminer)`. If you have an output: `inst
 metadynminer had non-zero exit status` there was a problem with installation. You may try:
 
 - On MS Windows install `Rtools`.
-- If you have permission issues, you can try commands `Sys.getenv("R_HOME")` and
+- If you have permission issues, you can try the commands `Sys.getenv("R_HOME")` and
 `Sys.getenv("R_LIBS_USER")` and check the permission of the printed directories. You may change
 installation directories by corresponding `Sys.setenv(...)` commands.
 
 You may check whether Metadynminer was installed correctly by typing:
-
 \verbatim
 library(metadynminer)
 \endverbatim
 
-This command shold have no output. Installation is done only once (or can be repreated for
+This command should have no output. Installation is done only once (or can be repreated for
 version upgrades). Loading of the package by `library` command must be done in every R seance.
 
 \section masterclass-22-02-resources Resources
@@ -65,21 +64,20 @@ You can clone this repository using the following command:
 git clone https://github.com/plumed/masterclass-22-02.git
 \endverbatim
 
-The repository contains hills and colvar files, respectively, from 10 ns metadynamics simulation of
-alanine dipeptide in water calculated in Plumed. Other input data are availeble from
+The repository contains hills and colvar files, respectively, from 10 or 1 ns metadynamics simulations of
+alanine dipeptide in water calculated in Plumed. Other input data are available from
 [Zenodo](XXXX) but are not required in this tutorial. The repo contains:
-- `HILLS.cv12` and `COLVAR.cv12` - hills and collective variable + bias report from metadynamics with phi a psi dihedral angles
+- `HILLS.cv12` and `COLVAR.cv12` - hills and collective variable + bias report from metadynamics with phi and psi dihedral angles
 - `HILLS.cv1` and `COLVAR.cv1` - hills and collective variable + bias report from metadynamics with phi dihedral angle
 - `HILLS.cv2` and `COLVAR.cv2` - hills and collective variable + bias report from metadynamics with psi dihedral angle
 
-This data are independent on Plumed version (for version >=2.0).
+This data are independent of Plumed version (for version >=2.0).
 
 \section masterclass-22-02-usingr Using R
 
-R is a program and a scrpting language predominantly developed for statistical data analysis. It is popular in
-statistics, economy, ecology, bioinformatics and other fileds. Let us quickly introduce R. Open R as described
+R is a program and scrpting language predominantly developed for statistical data analysis. It is popular in
+statistics, economy, ecology, bioinformatics, and other fields. Let us quickly introduce R. Open R as described
 above and type:
-
 \verbatim
 1+1
 2-1
@@ -87,18 +85,19 @@ above and type:
 5/2
 \endverbatim
 
-This shows addition, subtraction, multiplication and division. Numbers and other objects can be saved
-to variables. We advice users to avoid names of variables that can be confused with existing functions
-in R. In this masterclass we will use prefix "my" (e.g. `myhills`) to avoid this. Variable names are
+This shows addition, subtraction, multiplication, and division. Numbers and other objects can be saved
+to variables. We advice users to avoid the names of variables that can be confused with existing functions
+in R. In this masterclass, we will use the prefix "my" (e.g., `myhills`) to avoid this. Variable names are
 case-sensitive. The operator used to save something to is an arrow `<-` (less than followed by minus sign).
-You may see R codes with a normal equal sign but we will be puristic in this. Let us show variables in R:
+You may see R codes with a normal equal sign, but we will be puristic in this. Let us show the variables
+in R:
 \verbatim
 x <- 1+1
 x
 \endverbatim
 
-In the outputs above there is an unexpected string `[1]`. This is the index of the first item on the line.
-This is usefull when dealing with vectors. Vector can be created by implicitely typing its elements to the
+In the outputs above, there is an unexpected string `[1]`. This is the index of the first item on the line.
+This is useful when dealing with vectors. Vector can be created by implicitly typing its elements to the
 function `c()`, by `:` operator and other ways:
 \verbatim
 x <- c(1, 3, 2)
@@ -112,7 +111,7 @@ x
 R can also work with 2D and multidimensional matrices. R can work with strings (written in quotes, e.g.
 "blue"), Booleans (`TRUE` and `FALSE`, or shortened as `T` and `F`).
 
-R uses functions written as the name of funtion followed by its arguments in brackets:
+R uses functions written as the name of function followed by its arguments in brackets:
 \verbatim
 exp(1)
 cos(pi)
@@ -124,7 +123,7 @@ x<-0:10
 cos(x)
 \endverbatim
 
-Functions with more variables use specification set by `=`, separated by `,`:
+Functions with more variables use the specifications set by `=`, separated by `,`:
 \verbatim
 x<-0:100/10
 y<-cos(x)
@@ -133,7 +132,8 @@ plot(x, y, xlab="x axis", ylab="y axis", ylim=c(-2,2))
 \endverbatim
 
 Important difference from many other programming environments is that R can freely change number types,
-e.g. `3/2` is evaluated as 1.5, unlike Pyhton, which gives 1, because 3 and 2 are integers, not floats.
+e.g. `3/2` is evaluated as 1.5, unlike Pyhton, which gives 1, because 3 and 2 are integers,
+and not floats.
 
 Another important difference is that R uses indexes of vector items starting with 1 (not 0 line in C/C++,
 Python etc.). For example:
@@ -149,16 +149,16 @@ x[2]
 
 Finally, R can use other types of objects, including objects defined by a user. Their instances can
 be accessed by a string operator. For example, the function `prcomp` performs a principal component
-analysis. Its output is an object with multiple instances, for example with a rotation matrix:
+analysis. Its output is an object with multiple instances, for example, with a rotation matrix:
 \verbatim
 pcamodel <- prcomp(outer(1:3,1:2))
 pcamodel
 pcamodel$rotation
 \endverbatim
 
-Finally, to quit R you can use the function `q()`. The program ask the user whether he/she wants to
-save the data (i.e. variables created in the previous course of the run). We advise users to NOT save
-data, i.e. chose the option "n" or function `q(save="n")`. 
+Finally, to quit R you can use the function `q()`. The program asks the user whether he/she wants to
+save the data (i.e., variables created in the previous course of the run). We advise users to NOT save
+data, i.e. choose the option "n" or function `q(save="n")`. 
 
 \subsection masterclass-22-02-ex-1 Exercise 1: Calculation of the free energy surface from metadynamics hills
 
@@ -170,49 +170,49 @@ Now load the file `HILLS.cv12` into Metadynminer:
 \verbatim
 myhills12 <- read.hills("HILLS.cv12", per=c(T, T))
 \endverbatim
-At this point it is necessary to sets periodicity of CVs. The free energy surface was calculated using
-torsion angles as CVs, which are periodic. It is necessary to set periodicity to `TRUE` (or simplified
+At this point, it is necessary to set the periodicity of CVs. The free energy surface was calculated using
+torsion angles as CVs, which are periodic. It is necessary to set the periodicity to `TRUE` (or simplified
 as `T`) as a vector `per`. If you get an error message that the file was not found, it means that
-the home directory is not set properly. In Linux command line the home is the directory where you start
-R by the command `R`. In Rstudio you may navigate to the directory with the file using the File menu
+the home directory is not set properly. In Linux command line, the home is the directory where you start
+R by the command `R`. In Rstudio, you may navigate to the directory with the file using the File menu
 in the right bottom frame. Alternatively, you can use `getwd()` and `setwd("/path/to/your/dir")`.
 
 Hills can be also loaded from a HILLS file posted online by replacing the file name by an URL.
 
-To get help on any function in R, for example `read.hills` you can use either `help(read.hills)` or
+To get help to any function in R, for example, `read.hills`, you can use either `help(read.hills)` or
 `?read.hills)`.
 
 If you type the name of the hills file variable `myhills12` you get an information about the number
 of hills and CVs. The function `summary` (`summary(myhills12)`) returns the same information plus
 the ranges of CVs.
 
-A hills file can be plotted by plot function, i.e. `plot(myhills12)`. For a metadynamics with one
-CV it plots an evolution of the CV as a function of time. For a metadynamics with two CVs it plots
+A hills file can be plotted by the `plot` function, i.e., `plot(myhills12)`. For a metadynamics with one
+CV it plots the evolution of the CV as a function of time. For a metadynamics with two CVs it plots
 a scatter plot with CV1 on the horizontal axis and CV2 on the vertical axis. The plot function applied
 on metadynamics hills file is an extension of the standard plot function in R. You may set parameters
 `xlab`, `ylab`, `main`, `sub`, `xlim`, `ylim`, `pch`, `col`, `bg`, `cex`, `lwd` and `asp` (see
 `?plot.hillsfile`). It is possible to stack plots on top of each other by using the command `plot(...)`,
-followed by command `points(...)` or `lines(...)`.
+followed by a command `points(...)` or `lines(...)`.
 
-For well-tempered metadynamics it may be useful to check the evolution of heights of hills. This
+For well-tempered metadynamics, it may be useful to check the evolution of heights of hills. This
 can be done by the command:
 \verbatim
 plotheights(myhills12)
 \endverbatim
 
-Hills files are often composed from multiple metadynamics runs. This may cause that time
+Hills files are often obtained from multiple metadynamics runs. This may cause that time
 collumn does not correspond to the real time. The option `ignoretime=T` used either in
 `read.hills` or in `plotheights` replaces time by the hill number.
 
 The main point is the calculation of the free energy surface from the hills file as an
 negatve image of the sum of Gaussian hills (scaled in well-tempered metadynamics, which
-is pre-scaled in Plumed output).
+is pre-scaled in the Plumed output).
 
-This may be a time consuming with hundreds of thousand of hills. In metadynminer
+This may be time consuming with hundreds of thousands of hills. In metadynminer
 you can use two functions for this purpose, `fes` and `fes2`. The former is fast and
-approximative, the latter is slow and more acurate. The function `fes` uses a pre-computed
-Gaussian hill which is simply shifted on the canvas of the CV space for each hill
-and the bias potential is summed. The function `fes2` explicitely evaluates the Gaussian
+approximative, the latter is slow and more accurate. The function `fes` uses a pre-computed
+Gaussian hill which is simply being shifted on the canvas of the CV space for each hill
+and the bias potential is summed. The function `fes2` explicitly evaluates the Gaussian
 function. The function `fes` cannot be used in metadynamics with variable hills widths
 (the user would be warned).
 
@@ -220,12 +220,12 @@ In our tutorial we can do:
 \verbatim
 myfes12 <- fes(myhills12)
 \endverbatim
-(or the same with `fes2` for analyses, final illustrtions etc). Typing the name of the
+(or the same with `fes2` for analyses, final illustations etc). Typing the name of the
 free energy surface variable `myfes12` returns the number of CVs, number of bins
 (by default 256 for one CV, and 256x256 for two CVs), free energy maximum and minimum.
 
-It is possible to calculate minimum and maximum of the free energy surface by
-functions `min` and `max`, respectively. You may add, subtract, multiply and divide
+It is possible to calculate the value of minimum and maximum of the free energy surface by
+functions `min` and `max`, respectively. You may add, subtract, multiply, and divide
 the free energy surface by a constant. For example, you can set the free energy
 minimum to zero by subtracting the minimum:
 \verbatim
@@ -247,7 +247,7 @@ Again, you may use options `xlim`, `ylim`, `zlim`, `main`, `sub`, `xlab`, `ylab`
 by the `plottype`. The option `plottype="image"` plots a heat map,
 `plottype="contour"` plots contours, and `plottype="both"` plots both. 
 
-It is possible to switch on free energy scale by:
+It is possible to switch on the free energy scale by:
 \verbatim
 plot(myfes12, colscale=T)
 \endverbatim
@@ -259,15 +259,15 @@ the free energy surface with 20 contours by 10 kJ/mol type:
 myfes12 <- myfes12 - min(myfes12)
 plot(myfes12, zlim=c(0,200), nlevels=20)
 \endverbatim
-You may also explicitely set levels as a vector by the parameters `levels`.
+You may also explicitly set levels as a vector by the parameter `levels`.
 
-Default color palette for a 2D free energy surface in Metadynminer is
-`rainbow(135)[100:1]` (i.e. rainbow without violet color). If you prefer your
-own color palette you may set it as `col` paramteres. For example:
+The default color palette for a 2D free energy surface in Metadynminer is
+`rainbow(135)[100:1]` (i.e., rainbow without violet color). If you prefer your
+own color palette, you may set it as `col` paramtere. For example, this
+command plots the free energy surface in gray colors:
 \verbatim
 plot(myfes12, col=gray.colors(50))
 \endverbatim
-plots the free energy surface in gray colors.
 
 Metadynminer can identify minima on the free energy surface. This can be done
 by the function:
@@ -283,31 +283,31 @@ free energy surface). The function `summary` prints also populations
 (temperature and energy units can be controlled by `temp` and `eunit`,
 respectively).
 
-Some metadynamics simulation may result to rough free energy surfaces with
+Some metadynamics simulations may result in rough free energy surfaces with
 hundreds of free energy minima. It is not useful to identify all of them.
 It is better to find a reasonable number of minima scattered on the whole
 free energy surface. The function `fesminima` splits the canvas of the
-free energy surface into certain number of sections (by default 8x8 for 2D and
-8 for 1D free energy surface, may be controled by `nbins`). A global minimum
+free energy surface into a certain number of sections (by default 8x8 for 2D and
+8 for 1D free energy surfaces, it may be controled by `nbins`). A global minimum
 is found in each section and then it is checked whether it is a local minimum
 of the entire free energy surface. If not, it is discarded.
 
 It may happen that the function `fesminima` cannot identify some minimum
 or it is necessary to add a reference point on a free energy surface, which
-is not a minimum. For this purpose it is possible to make a minimum by
-`oneminimum` function and add it existing minima (by addition operation).
+is not a minimum. For this purpose, it is possible to make a minimum by
+`oneminimum` function and add it to the existing minima (by addition operation).
 
 The output of `fesminima` can be plotted by `plot` function. The plot is
-similar to free energy surface and it contains additional letter in the points
+similar to the free energy surface and it contains additional letters in the points
 of minima.
 \verbatim
 plot(myminima12)
 \endverbatim
 
-Convergency of metadynamics can be assessd by the time profile of the differences
-between free energy minima. Stable diference between free energy minima indicates
-that the free energy surface is convered and thus accurate. It must be kept in
-mind that this is a neccesary but not the only requirement of convergence.
+Convergency of metadynamics can be assessed by the time profile of the differences
+between free energy minima. Stable difference between free energy minima indicates
+that the free energy surface is converged and thus accurate. It must be kept in
+mind that this is a necessary but not the only requirement of convergence.
 Please follow the
 [PLUMED Masterclass 21.2: Statistical errors in MD ](https://www.plumed.org/doc-v2.7/user-doc/html/masterclass-21-2.html)
 for more details. The time profile of the differences between free energy minima
@@ -321,15 +321,15 @@ and calculates the values of free energy in the same point in the CV space along
 the simulation. Typing the name of the time profile returns the same output
 as for minima. The function `summary` prints the same output as the summary
 of free energy minima together with minimal and maximal free energy relative
-to the global free energy minimum. The minimum A is always the global and its
-relative free energy is 0 (also minimum and maximum is zero). The column `tail`
+to the global free energy minimum. The minimum A is always the global minimum and its
+relative free energy is 0 (also its minimum and maximum is zero). The column `tail`
 contains the relative free energy at the end of the simulation. It is possible
-to specify the time window in which the minimum and maximum is calculated,
+to specify the time window in which the minimum and maximum are calculated,
 for example the second half of the simulation, by `imind` and `imaxd`. By
-default they are set the 1 and the number of hills, respectively, i.e. to
+default they are set to 1 and the number of hills, respectively, i.e. to
 whole simulation.
 
-Finally, metadynminer provides a function for nudged elastic band:
+Finally, metadynminer provides a function for the nudged elastic band:
 \verbatim
 myneb<-neb(minima12, min1="A", min2="D")
 myneb
