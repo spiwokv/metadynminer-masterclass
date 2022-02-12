@@ -292,6 +292,11 @@ free energy surface into certain number of sections (by default 8x8 for 2D and
 is found in each section and then it is checked whether it is a local minimum
 of the entire free energy surface. If not, it is discarded.
 
+It may happen that the function `fesminima` cannot identify some minimum
+or it is necessary to add a reference point on a free energy surface, which
+is not a minimum. For this purpose it is possible to make a minimum by
+`oneminimum` function and add it existing minima (by addition operation).
+
 
 
 \subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
