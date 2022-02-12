@@ -234,6 +234,25 @@ myfes12 <- myfes12 - min(myfes12)
 Similarly, to convert the free energy surface from kJ/mol to kcal/mol you may
 divide it by 4.18.
 
+It is also possible to sum and subtract two free energy surfaces. This will be
+demonstrated later.
+
+The important function of Metadynaminer is plotting of the free energy surface.
+You can use:
+\verbatim
+plot(myfes12)
+\endverbatim
+Again, you may use options `xlim`, `ylim`, `zlim`, `main`, `sub`, `xlab`, `ylab`,
+`labcex` and `drawlabels` (see `?plot.fes`). You may control the type of the plot
+by the `plottype`. The option `plottype="image"` plots a heat map,
+`plottype="contour"` plots contours, and `plottype="both"` plots both. 
+
+It is possible to switch on free energy scale by:
+\verbatim
+plot(myfes12, colscale=T)
+\endverbatim
+You may change the title of the scale by `colscalelab="your label"`.
+
 
 
 \subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
