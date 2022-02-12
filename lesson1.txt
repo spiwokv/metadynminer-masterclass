@@ -141,7 +141,11 @@ Python etc.). For example:
 x <- c("Carlo", "Gareth", "Giovanni", "Max")
 x[2]
 \endverbatim
-will return Gareth (Python with `<-` replaced by `=` returns Giovanni).
+will return Gareth. In contrast, Python returns Giovanni:
+\verbatim
+x = ["Carlo", "Gareth", "Giovanni", "Max"]
+x[2]
+\endverbatim
 
 Finally, R can use other types of objects, including objects defined by a user. Their instances can
 be accessed by a string operator. For example, the function `prcomp` performs a principal component
