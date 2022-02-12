@@ -460,12 +460,13 @@ simulation simply by summing hills. This can be done by reweighing.
 This will also demonstrate the advanced features of metadynminer.
 
 Reweighing predicts what would have been the distribution of a CV
-or CVs in the biased simulation, if it had not been biased. Umbrella
-sampling reweighing (REFXXX) weights the distribution of the states by
-$\exp(+V_{bias}/kT)$. This can be applied to metadynamics bias
+or CVs in the biased simulation, if it had not been biased.
+[Umbrella sampling reweighing](https://doi.org/10.1016%2F0021-9991%2877%2990121-8)
+weights the distribution of the states by
+exp(+bias/kT). This can be applied to metadynamics bias
 potential with a correction to the time-dependence of the bias
 potential. We will use the correction introduced by
-Tiwari and Parrinello (REFXXXXX).
+[Tiwari and Parrinello](https://doi.org/10.1021/jp504920s).
 The main idea is the bias potential is divided into
 time-independent and the time-dependent component. The time-dependent
 component is calculated by the following procedure:
@@ -490,8 +491,8 @@ generates a vector by repeating an element. Here it generates
 a vector with `nframes` (50) elements equal to zero. The variable
 `step` is equal to the number of hills divided by 50 in the first
 step, twice as many in the second step, etc. The free energy surface
-is calculated for this number of hills. Next, $\exp(-G/kT)$ or
-$\exp(-G/k\DeltaT)$ is calculated and stored in vectors `s1` and
+is calculated for this number of hills. Next, exp(-G/kT) and
+exp(-G/kDeltaT) is calculated and stored in vectors `s1` and
 `s2`, respectively. Finally, `s1` and `s2` are divided elementwise
 and stored to `ebetac`.
 
