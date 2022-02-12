@@ -162,6 +162,46 @@ data, i.e. chose the option "n" or function `q(save="n")`.
 
 \subsection masterclass-22-02-ex-1 Exercise 1: Calculation of the free energy surface from metadynamics hills
 
+Open R (in Rstudio or command line) and load Metadynminer:
+\verbatim
+library(metadynminer)
+\endverbatim
+Now load the file `HILLS.cv12` into Metadynminer:
+\verbatim
+myhills12 <- read.hills("HILLS.cv12", per=c(T, T))
+\endverbatim
+At this point it is necessary to sets periodicity of CVs. The free energy surface was calculated using
+torsion angles as CVs, which are periodic. It is necessary to set periodicity to `TRUE` (or simplified
+as `T`) as a vector `per`. If you get an error message that the file was not found, it means that
+the home directory is not set properly. In Linux command line the home is the directory where you start
+R by the command `R`. In Rstudio you may navigate to the directory with the file using the File menu
+in the right bottom frame. Alternatively, you can use `getwd()` and `setwd("/path/to/your/dir")`.
+
+Hills can be also loaded from a HILLS file posted online by replacing the file name by an URL.
+
+To get help on any function in R, for example `read.hills` you can use either `help(read.hills)` or
+`?read.hills)`.
+
+If you type the name of the hills file variable `myhills12` you get an information about the number
+of hills and CVs. The function `summary` (`summary(myhills12)`) returns the same information plus
+the ranges of CVs.
+
+A hills file can be plotted by plot function, i.e. `plot(myhills12)`. For a metadynamics with one
+CV it plots an evolution of the CV as a function of time. For a metadynamics with two CVs it plots
+a scatter plot with CV1 on the horizontal axis and CV2 on the vertical axis. The plot function applied
+on metadynamics hills file is an extension of the standard plot function in R. You may set parameters
+`xlab`, `ylab`, `main`, `sub`, `xlim`, `ylim`, `pch`, `col`, `bg`, `cex`, `lwd` and `asp` (see
+`?plot.hillsfile`). It is possible to stack plots on top of each other by using the command `plot(...)`,
+followed by command `points(...)` or `lines(...)`.
+
+For well-tempered metadynamics it may be useful to check the evolution of heights of hills. This
+can be done by the command:
+\verbatim
+plotheights(acealanme)
+\endverbatim
+
+
+
 \subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
 
 \subsection masterclass-22-02-ex-3 Exercise 3: Making a movie of flooding
