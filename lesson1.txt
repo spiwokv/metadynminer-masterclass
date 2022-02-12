@@ -269,6 +269,31 @@ plot(myfes12, col=gray.colors(50))
 \endverbatim
 plots the free energy surface in gray colors.
 
+Metadynminer can identify minima on the free energy surface. This can be done
+by the function:
+\verbatim
+myminima <- fesminima(myfes12)
+myminima
+\endverbatim
+The program should find approximately five free energy minima for
+alalnine dipeptide in water and print their idetifier (letters A, B, C, ...
+followed by AA, AB, AC, ...), location on the free energy
+surface (in bin ID and in CVs), and the free energy (for the final
+free energy surface). The function `summary` prints also populations
+(temperature and energy units can be controlled by `temp` and `eunit`,
+respectively).
+
+Some metadynamics simulation may result to rough free energy surfaces with
+hundreds of free energy minima. It is not useful to identify all of them.
+It is better to find a reasonable number of minima scattered on the whole
+free energy surface. The function `fesminima` splits the canvas of the
+free energy surface into certain number of sections (by default 8x8 for 2D and
+8 for 1D free energy surface, may be controled by `nbins`). A global minimum
+is found in each section and then it is checked whether it is a local minimum
+of the entire free energy surface. If not, it is discarded.
+
+
+
 \subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
 
 \subsection masterclass-22-02-ex-3 Exercise 3: Making a movie of flooding
