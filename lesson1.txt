@@ -197,8 +197,32 @@ followed by command `points(...)` or `lines(...)`.
 For well-tempered metadynamics it may be useful to check the evolution of heights of hills. This
 can be done by the command:
 \verbatim
-plotheights(acealanme)
+plotheights(myhills12)
 \endverbatim
+
+Hills files are often composed from multiple metadynamics runs. This may cause that time
+collumn does not correspond to the real time. The option `ignoretime=T` used either in
+`read.hills` or in `plotheights` replaces time by the hill number.
+
+The main point is the calculation of the free energy surface from the hills file as an
+negatve image of the sum of Gaussian hills (scaled in well-tempered metadynamics, which
+is pre-scaled in Plumed output).
+
+This may be a time consuming with hundreds of thousand of hills. In metadynminer
+you can use two functions for this purpose, `fes` and `fes2`. The former is fast and
+approximative, the latter is slow and more acurate. The function `fes` uses a pre-computed
+Gaussian hill which is simply shifted on the canvas of the CV space for each hill
+and the bias potential is summed. The function `fes2` explicitely evaluates the Gaussian
+function. The function `fes` cannot be used in metadynamics with variable hills widths
+(the user would be warned).
+
+In our tutorial we can do:
+\verbatim
+myfes12 <- fes(myhills12)
+\endverbatim
+(or the same with `fes2` for analyses, final illustrtions etc). Typing the name of the
+free energy surface variable `myfes12` returns the number of CVs, number of bins
+(by default 256 for one CV, and 256x256 for two CVs), free energy maximum and minimum.
 
 
 
