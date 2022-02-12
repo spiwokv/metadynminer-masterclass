@@ -272,8 +272,8 @@ plots the free energy surface in gray colors.
 Metadynminer can identify minima on the free energy surface. This can be done
 by the function:
 \verbatim
-myminima <- fesminima(myfes12)
-myminima
+myminima12 <- fesminima(myfes12)
+myminima12
 \endverbatim
 The program should find approximately five free energy minima for
 alalnine dipeptide in water and print their idetifier (letters A, B, C, ...
@@ -300,8 +300,41 @@ is not a minimum. For this purpose it is possible to make a minimum by
 The output of `fesminima` can be plotted by `plot` function. The plot is
 similar to free energy surface and it contains additional letter in the points
 of minima.
+\verbatim
+plot(myminima12)
+\endverbatim
 
+Convergency of metadynamics can be assessd by the time profile of the differences
+between free energy minima. Stable diference between free energy minima indicates
+that the free energy surface is convered and thus accurate. It must be kept in
+mind that this is a neccesary but not the only requirement of convergence.
+Please follow the
+[PLUMED Masterclass 21.2: Statistical errors in MD ](https://www.plumed.org/doc-v2.7/user-doc/html/masterclass-21-2.html)
+for more details. The time profile of the differences between free energy minima
+can be caluclated and plotted as:
+\verbatim
+myprof12 <- feprof(myminima12)
+plot(myprof12)
+\endverbatim
+The program takes free energy minima (as identified by the function `fesminima`)
+and calculates the values of free energy in the same point in the CV space along
+the simulation. Typing the name of the time profile returns the same output
+as for minima. The function `summary` prints the same output as the summary
+of free energy minima together with minimal and maximal free energy relative
+to the global free energy minimum. The minimum A is always the global and its
+relative free energy is 0 (also minimum and maximum is zero). The column `tail`
+contains the relative free energy at the end of the simulation. It is possible
+to specify the time window in which the minimum and maximum is calculated,
+for example the second half of the simulation, by `imind` and `imaxd`. By
+default they are set the 1 and the number of hills, respectively, i.e. to
+whole simulation.
 
+Finally, metadynminer provides a function for nudged elastic band:
+\verbatim
+myneb<-neb(minima12, min1="A", min2="D")
+myneb
+plot(myneb)
+\endverbatim
 
 \subsection masterclass-22-02-ex-2 Exercise 2: Making a movie
 
