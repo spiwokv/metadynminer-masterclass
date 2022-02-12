@@ -331,9 +331,11 @@ whole simulation.
 
 Finally, metadynminer provides a function for the nudged elastic band:
 \verbatim
-myneb<-neb(minima12, min1="A", min2="D")
+myneb<-neb(myminima12, min1="A", min2="D")
 myneb
 plot(myneb)
+plot(myminima12)
+linesonfes(myneb)
 \endverbatim
 
 \subsection masterclass-22-02-ex-2 Exercise 2: Making high resolution plots and movies
